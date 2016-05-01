@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Element Blocker",
-  "description": "This extension allows you to remove elements permanately from web pages.",
+  "description": "This extension allows you to remove elements permanently from web pages.",
   "version": "1.0",
   "content_scripts": [
     {

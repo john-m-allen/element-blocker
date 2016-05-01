@@ -13,7 +13,7 @@ This chrome extension adds a menu item to the right click menu to "Remove Elemen
 
 ## Motivation
 
-Some sites have content I never want to see. I wanted to create a way to easily remove it in a robust and permanate manner.
+Some sites have content I never want to see. I wanted to create a way to easily remove it in a robust and permanent manner.
 
 ## Installation
 
