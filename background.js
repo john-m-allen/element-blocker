@@ -8,17 +8,33 @@ var removeElement = function(e) {
 	});
 };
 
-/* Store removed elements. */
+/* Return Removed Elements. */
+function returnRemovedElements() {
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	  chrome.tabs.sendMessage(tabs[0].id, {text:removedElements});
+	});
+};
+
+/* Store Removed Elements. */
+function storeRemovedElements(elementSelector){
+	removedElements.push(elementSelector);
+}
+
+/* Handle Requests. */
 chrome.runtime.onMessage.addListener(function(message){
-	if(typeof message.elementRemoved === 'object') {
-		removedElements.push(message.removedElements);
-		alert('Removed Element: ' + message.removedElements + ' - Total Elements Removed: ' + removedElements.length);
+	if(typeof message.elementRemoved === 'string') {
+		// Handle store element request.
+		storeRemovedElements(message.elementRemoved);
+		alert('Total Elements Removed: ' + removedElements.length);
+	} else if(message.getElements === true) {
+		// Handle get elements request.
+		returnRemovedElements();
 	}
 });
 
 /* Right click menu. */
 chrome.contextMenus.create({
     "title": "Remove Element",
-    "contexts": ["page", "selection", "image", "link"],
+    "contexts": ["all"],
     "onclick" : removeElement
 });

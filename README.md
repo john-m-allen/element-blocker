@@ -7,9 +7,10 @@ This chrome extension adds a menu item to the right click menu to "Remove Elemen
 
 #####TODO:
 1. Add persistant remove element over multiple viewing sessions.
-2. Add revert functionality (option menu). 
-3. Add element highlighting.
-4. Make it pretty (new styles and icons).
+2. Add revert functionality (option menu).
+3. Add revert last functionality (modal).
+4. Add element highlighting.
+5. Make it pretty (new styles and icons).
 
 ## Motivation
 
