@@ -5,7 +5,7 @@ Element Blocker - Chrome Extension
 
 This chrome extension adds a menu item to the right click menu to "Remove Element". 
 
-TODO: 
+#####TODO:
 1. Add persistant remove element over multiple viewing sessions.
 2. Add revert functionality (option menu). 
 3. Add element highlighting.
