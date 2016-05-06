@@ -27,15 +27,39 @@ function getSelector(el){
   return names.join(" > ");
 }
 
+/* Hide element. */
+function hideElement(selector) {
+  //CSS implementation. todo figure out if this is best
+  var styleRule = selector + ' { display: none; }'
+  var sheet = window.document.styleSheets[0];
+  if (sheet !== null) {
+    if (sheet.cssRules !== null && typeof sheet.cssRules.lenth === 'number') {
+        // If styles exist, append to stylesheet.
+        sheet.insertRule(styleRule, sheet.cssRules.length);
+      } else {
+        // If no styles exist, start stylesheet.
+        sheet.insertRule(styleRule, 0);
+      }
+  } else {
+    // If no stylesheet, embed css inline (not as robust as using stylesheets).
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = styleRule;
+    document.body.appendChild(css);
+  }
+}
+
 /* Remove element. */
 function removeElement() {
   if(typeof currentElement !== 'undefined') {
-    	// Store element information.
-      var selector = getSelector(currentElement);
-    	chrome.runtime.sendMessage({'elementRemoved': selector});
+  	// Store element information.
+    var selector = getSelector(currentElement);
+  	chrome.runtime.sendMessage({'elementRemoved': selector});
+    // Hide element.
+    hideElement(selector);
 
-    	// Remove element.
-      currentElement.remove();
+  	// Remove element.
+    currentElement.remove();
   }
 }
 
@@ -44,8 +68,12 @@ function removeInitialElements(elementSelectors) {
   console.log('Initial Elements Removed: ' + elementSelectors)
   for (var i = 0; i < elementSelectors.length; i++) {
       if(typeof elementSelectors[i] !== 'undefined') {
+          var selector = elementSelectors[i];
+          // Hide element.
+          hideElement(selector);
+
           // Remove element.
-          var element = document.querySelector(elementSelectors[i]);
+          var element = document.querySelector(selector);
           if (element !== null) {
             element.remove();
           }
